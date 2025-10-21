@@ -1,18 +1,30 @@
 ```markdown
-# Esports Info Site - Coming Soon
+# To-Do List (LocalStorage)
 
-Bu repo, e-spor takımları, oyuncular, koçlar, yöneticiler, turnuvalar ve maç geçmişlerini gösteren bir bilgilendirme sitesi için başlangıç deposudur.
+Basit bir To-Do uygulaması. Görevler tarayıcıda localStorage ile saklanır; sayfa yenilense bile görevler korunur.
 
-İçerik:
-- index.html: basit "coming soon" sayfası (GitHub Pages için)
-- LICENSE: MIT lisansı
-- .gitignore: Node/VSCode tipik dosyaları hariç tutar
-- create_repo.sh: (opsiyonel) gh CLI ile otomatik repo oluşturma script'i
+Özellikler:
+- Görev ekleme (Enter ile)
+- İn-line düzenleme (çift tıkla)
+- Görev silme
+- Tamamlandı / geri alma
+- Filtreleme: Tümü / Aktif / Tamamlandı
+- Tamamlananları temizle
+- Görevleri JSON olarak dışa aktarma ve JSON ile içe aktarma
+- Basit, erişilebilir HTML + CSS + vanilla JS (hiçbir bağımlılık yok)
 
 Kullanım:
-1. Eğer repo zaten oluşturulduysa (ör: https://github.com/barann95/esports.github.io) bu dosyaları repo köküne koy ve pushla.
-2. Eğer repo yoksa GitHub UI veya gh CLI ile repo oluşturup sonra pushla.
+1. Dosyaları aynı klasöre koy: index.html, style.css, app.js
+2. index.html'i tarayıcıda aç
+3. Görev ekle, yönet, dışa/ice aktar
 
-Sonraki adımlar:
-- Repo hazır olduktan sonra istersen ben Next.js iskeleti (TypeScript + Tailwind + Prisma + örnek seed) hazırlayıp burada vereyim; sen pushlarsın veya istersen ben adım adım yönlendiririm.
+LocalStorage anahtarı: `todos-v1`
+
+Geliştirme fikirleri:
+- Görevlere etiket/etiket filtreleme ekleme
+- Sıralama ve sürükle-bırak (drag & drop)
+- Farklı cihazlar arasında senkronizasyon (ör. backend + kullanıcı girişi)
+- Unit testler ve E2E testleri
+
+İhtiyacın olursa bu projeyi Next.js/React/TypeScript ile de kurup GitHub Pages veya Vercel'e deploy edebilirim.
 ```
