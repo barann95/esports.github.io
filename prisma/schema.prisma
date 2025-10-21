@@ -1,0 +1,111 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Team {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  shortName String?
+  logoUrl   String?
+  country   String?
+  foundedAt DateTime?
+  description String?
+  marketValue Float? 
+  players   Player[]
+  coaches   Staff[]   @relation("CoachTeam")
+  managers  Staff[]   @relation("ManagerTeam")
+  matchesA  Match[]   @relation("teamA")
+  matchesB  Match[]   @relation("teamB")
+  standings Standing[]
+  marketHist MarketValueHistory[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Player {
+  id         String    @id @default(cuid())
+  name       String
+  nickname   String    @unique
+  dob        DateTime?
+  nationality String?
+  role       String?
+  profileImage String?
+  marketValue Float?
+  teamId     String? 
+  team       Team?     @relation(fields: [teamId], references: [id])
+  marketHist MarketValueHistory[]
+  stats      Json?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Staff {
+  id        String @id @default(cuid())
+  name      String
+  title     String  // Coach or Manager
+  profileImage String?
+  teamId    String?
+  team      Team?   @relation(fields: [teamId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model MarketValueHistory {
+  id         String   @id @default(cuid())
+  entityType String   // "TEAM" or "PLAYER"
+  entityId   String
+  value      Float
+  date       DateTime @default(now())
+}
+
+model Tournament {
+  id         String   @id @default(cuid())
+  name       String
+  slug       String   @unique
+  startDate  DateTime?
+  endDate    DateTime?
+  prizePool  Float?
+  format     String?
+  description String?
+  matches    Match[]
+  standings  Standing[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Match {
+  id          String   @id @default(cuid())
+  tournamentId String
+  tournament  Tournament @relation(fields: [tournamentId], references: [id])
+  stage       String?
+  scheduledAt DateTime?
+  status      String   @default("SCHEDULED") // SCHEDULED, LIVE, FINISHED
+  teamAId     String?
+  teamA       Team?    @relation("teamA", fields: [teamAId], references: [id])
+  teamBId     String?
+  teamB       Team?    @relation("teamB", fields: [teamBId], references: [id])
+  scoreA      Int? 
+  scoreB      Int?
+  details     Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Standing {
+  id           String  @id @default(cuid())
+  tournamentId String
+  tournament   Tournament @relation(fields: [tournamentId], references: [id])
+  teamId       String
+  team         Team    @relation(fields: [teamId], references: [id])
+  played       Int     @default(0)
+  wins         Int     @default(0)
+  losses       Int     @default(0)
+  draws        Int     @default(0)
+  points       Int     @default(0)
+  mapDiff      Int     @default(0)
+}
