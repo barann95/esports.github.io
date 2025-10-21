@@ -1,20 +1,41 @@
 <!doctype html>
 <html lang="tr">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Esports Info Site — Coming Soon</title>
-    <style>
-      body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; background:#0b1020; color:#fff; }
-      .card { text-align:center; max-width:720px; padding:32px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow: 0 6px 24px rgba(2,6,23,0.6); }
-      a { color:#58a6ff; text-decoration:none; }
-    </style>
-  </head>
-  <body>
-    <div class="card">
-      <h1>Esports Info Site</h1>
-      <p>Çok yakında — takımlar, oyuncular, turnuvalar ve maç geçmişleri burada olacak.</p>
-      <p>Hazırlamak istediğin özellikler varsa söyle; ben Next.js iskeleti ve örnek veri ile repo'yu hazır hale getireyim.</p>
-    </div>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>To-Do List (LocalStorage)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app" aria-labelledby="app-title">
+    <h1 id="app-title">Yapılacaklar</h1>
+
+    <form id="todo-form" class="todo-form" aria-label="Yeni görev ekle">
+      <input id="todo-input" class="todo-input" type="text" placeholder="Yeni görev ekle ve Enter'a bas" aria-label="Görev metni" />
+      <button type="submit" class="add-btn" aria-label="Görev ekle">Ekle</button>
+    </form>
+
+    <section class="controls" aria-label="Kontroller">
+      <div class="filters" role="tablist" aria-label="Filtreler">
+        <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">Tümü</button>
+        <button class="filter-btn" data-filter="active" role="tab" aria-selected="false">Aktif</button>
+        <button class="filter-btn" data-filter="completed" role="tab" aria-selected="false">Tamamlandı</button>
+      </div>
+      <div class="actions">
+        <button id="clear-completed" class="action-btn">Tamamlananları Temizle</button>
+        <button id="export-btn" class="action-btn">Dışa Aktar</button>
+        <input id="import-file" type="file" accept="application/json" style="display:none" />
+        <button id="import-btn" class="action-btn">İçe Aktar</button>
+      </div>
+    </section>
+
+    <ul id="todo-list" class="todo-list" aria-live="polite" aria-label="Görev listesi"></ul>
+
+    <footer class="footer">
+      <span id="todo-count" class="todo-count">0 görev</span>
+    </footer>
+  </main>
+
+  <script src="app.js" defer></script>
+</body>
 </html>
